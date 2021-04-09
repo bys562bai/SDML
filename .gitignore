@@ -1,0 +1,17 @@
+/build-util/cmake-module/*
+
+tmp/*
+draft*
+*.tmp
+*.tmp.txt
+*.tmp.py
+*.tmp.ipynb
+*.tmp.cpp
+*.tmp.hpp
+*.tmp.cxx
+*.tmp.c
+*.gen.*
+
+.vscode/*
+**/build/*
+/demo/*
