@@ -1,5 +1,6 @@
 /build-util/cmake-module/*
 
+**/__pycache__/*
 tmp/*
 draft*
 *.tmp
