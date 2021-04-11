@@ -1,0 +1,27 @@
+元素:
+注释，字符串，数字，列表，枚举，模块，类型
+
+关键字:
+\enum \class \module
+
+实例:
+cls = \class {
+    x:int
+    y:int
+}
+
+e1 = \enum {
+    ABC
+    DEF
+    GHZ
+    \flag:      //flag标记
+    X_ON
+    Y_ON
+    Z_ON
+    !\flag:     //关闭flag标记
+    xxx
+    zzz
+}
+
+e1.ABC
+e1.DEF

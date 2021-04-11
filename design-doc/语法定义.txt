@@ -1,0 +1,65 @@
+ascii		(0 FF)
+utf		(0 10FFFF)
+ucs		
+ascii_blank	{'\n' '\r' '\t' '\v' '\f'}
+ascii_normal	(' ' '~')
+ascii_valid		ascii_normal | ascii_blank
+ascii_null		0
+char_engl_lower	('a' 'z')
+char_engl_upper	('A' 'Z')
+char_engl		char_engl_lower | char_engl_upper
+char_num		('0' '9')
+ascii_general	char_engl | char_num
+ascii_special	ascii_normal - ascii_general - ' '
+char_normal	ucs
+char_general	ucs - ascii_special
+
+
+
+newline		{'\n', '\r\n'}
+delimeter		';'
+comment		['#' ** * '\r\n']
+paren_field	[ '(' **-')' * ')' ]
+bracket_field	[ '[' **-']' * ']' ]
+brace_field	[ '{' **-'}' * '}' ]
+
+
+//uint
+decimal0                [char_num [','? char_num]* ] 
+//int
+decimal1                [s'+-' ? decimal0 ]
+//float
+decimal2                [decimal1 '.' decimal0? ]
+decimal3                [decimal2 'e' {decimal1 decimal2} ] 
+
+decimal                 {decimal0 decimal1 decimal2 deciaml3}
+
+
+escape		[ '\\' {s'nrtvf\\'  }]
+string1		[ '"'     escape| ( ** - '"' )  * '"' ]
+string2		[ "'"    escape| ( ** - "'") * "'" ]
+string1_raw1	[ 'r"' **-'"' * '"' ]
+string2_raw1	[ "r'" **-"'" * "'"]
+
+//其次，任何string中，如果是多行书写的，且第一行全为空白字符，则忽略第一行
+
+#string1_raw2   [ 'R"' tag '['  content ']' tag '"'] 	
+
+ 
+string		[ascii_general string1 | string2]
+
+
+operator		ascii_special+
+keyword		[ '\\' char_normal-' ' * ]
+
+
+
+
+
+
+
+
+
+
+
+
