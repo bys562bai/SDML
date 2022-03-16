@@ -24,7 +24,6 @@ bracket_field	[ '[' **-']' * ']' ]
 brace_field	[ '{' **-'}' * '}' ]
 
 
-//uint
 decimal0                [char_num [','? char_num]* ] 
 //int
 decimal1                [s'+-' ? decimal0 ]

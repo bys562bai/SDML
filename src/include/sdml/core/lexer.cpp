@@ -149,13 +149,43 @@ namespace sdml {
 		return false;
 	}
 
+	bool Lexer::_parse_number(){
+		const static re2::RE2 pat(R"xxx([0-9][0-9a-fg-zA-FG-Z_\+-]*)xxx");
+		if(*_pc == '+' || *_pc == '-'){
+			inc_pc();
+		}
+		if(*_pc == '.'){
+			inc_pc();
+			if(parse_by_regex(pat)){
+				return true;
+			}
+		}else{
+			if(parse_by_regex(pat)){
+				if(*_pc == '.'){
+					inc_pc();
+					if(parse_by_regex(pat)){
+						return true;
+					}
+				}else
+					return true;
+			}
+		}
+		return false;
+	}
+
 	bool Lexer::parse_number()
 	{
-		const static re2::RE2 pat(R"xxx((\+|-)?\.?[0-9][0-9\w,\.\+-]*)xxx");
 		auto pos = pc_pos();
-		if (parse_by_regex(pat)) {
-			put_node(KIND_IDENTIFIER, pos);
-			return true;
+		if(_parse_number()){
+			if(*_pc == 'e'){
+				if(_parse_number()){
+					put_node(KIND_NUMBER, pos);
+					return true;
+				}
+			}else{
+				put_node(KIND_NUMBER, pos);
+				return true;
+			}
 		}
 		return false;
 	}

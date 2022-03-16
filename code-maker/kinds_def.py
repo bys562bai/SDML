@@ -41,12 +41,15 @@ namespace sdml
 ''' + \
 '''
 
-    inline std::string to_string(SDML_NODE_KIND kind) {
+    inline const std::string& to_string(SDML_NODE_KIND kind) {
+''' + '\n'.join(f'       static const std::string {kind}_str = "{kind}";' for kind in kinds) + \
+'''
+
         switch (kind)
         {
 '''+ '\n'.join(
 f'''        case sdml::KIND_{kind}:
-            return "{kind}";''' for kind in kinds
+            return {kind}_str;''' for kind in kinds
 ) + '''
         }
 

@@ -155,6 +155,8 @@ namespace sdml
         const char* _pc = nullptr; //cur
         inline const static std::string pat_utf_general = R"xxx((\w|[^\x00-\x7F]))xxx"; //包括下划线，字母，数字，和任何非ASCII字符以及非控制字符
         inline const static std::string pat_utf_general_no_num = R"xxx(([a-zA-Z_]|[^\x00-\x7F]))xxx";
+
+        bool _parse_number();
     };
 
 } // namespace sdml

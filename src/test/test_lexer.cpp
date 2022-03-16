@@ -11,11 +11,11 @@ namespace {
 	using namespace sdml;
 	using std::string;
 	struct Tester {
-		Lexer lexer;
+		Lexer lexer;	
 		inline static string number_s = R"xxx(
  123 456 s789 +324 -342 +0b333 
 777 888 33abc_e333
-	+0abfdsf.fds,dfs,5.55,e-342e+32**)xxx";
+	+0adfsdbfdsffds_dfs_5.55_de-342.32**)xxx";
 
 		inline static string comment_s = R"xxx(
 	32fdas var1 var2 #var4224 varxxx
@@ -53,7 +53,7 @@ namespace {
 			test_init();
 			test_number();
 			test_comment();
-			test_vars();
+			test_identifier();
 			test_string();
 
 			return true;
@@ -71,7 +71,7 @@ namespace {
 			return test_by_source("TEST COMMENT", comment_s);
 		}
 
-		bool test_vars() {
+		bool test_identifier() {
 			return test_by_source("TEST IDENTIFIER", identifier_s);
 		}
 
@@ -88,7 +88,7 @@ namespace {
 			for (int i = 0; i < res.nodes.size(); i++) {
 				fmt::print("{}\n", res.get_node_desc_string(i));
 			}
-			cout << endl;
+			cout << endl << endl << endl;
 			return true;
 		}
 	};
